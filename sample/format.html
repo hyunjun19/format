@@ -1,0 +1,77 @@
+﻿<html>
+<head>
+<title>format example</title>
+<script type="text/javascript" src="../src/format.js"></script>
+<script type="text/javascript">
+	function fnDoFormatByIdx() {
+		var inputText = document.getElementById("input-idx").value;
+		var output = document.getElementById("output-idx");
+		
+		if (!inputText) {
+			output.innerHTML = "포멧이 유효하지 않습니다.";
+			return;
+		}
+		
+		var idx0 = document.getElementById("idx-0").value;
+		var idx1 = document.getElementById("idx-1").value;
+		var idx2 = document.getElementById("idx-2").value;
+		
+		output.innerHTML = inputText.format(idx0, idx1, idx2);
+	}
+	
+	function fnDoFormatByJson() {
+		var inputText = document.getElementById("input-json").value;
+		var output = document.getElementById("output-json");
+		
+		if (!inputText) {
+			output.innerHTML = "포멧이 유효하지 않습니다.";
+			return;
+		}
+		
+		var jsonStr = document.getElementById("json").value;
+		var jsonVal;
+		try {
+			jsonVal = JSON.parse(jsonStr);
+		} catch(e) {
+			output.innerHTML = "JSON 입력이 유효하지 않습니다.";
+		}
+		
+		output.innerHTML = inputText.format(jsonVal);
+	}
+</script>
+</head>
+
+<body>
+
+<div style="border:1px solid blue;border-radius:10px;padding:10px;">
+	<h3>인덱스 파라미터를 사용합니다.</h3>
+	
+	<textarea id="input-idx" style="width:400px;height:60px;">{0}과 {1}이 마르고 닳도록 {2}이 보우하사 우리나라만세</textarea><br/>
+	<label>index 0: <input type="text" id="idx-0" value="동해물" /></label><br/>
+	<label>index 1: <input type="text" id="idx-1" value="백두산" /></label><br/>
+	<label>index 2: <input type="text" id="idx-2" value="하느님" /></label><br/><br/>
+	
+	<button type="button" onclick="fnDoFormatByIdx();">인덱스 포멧 실행</button>
+	
+	<h3 id="output-idx"></h3>
+</div>
+
+<hr/>
+
+<div style="border:1px solid green;border-radius:10px;padding:10px;">
+	<h3>JSON 파라미터를 사용합니다.</h3>
+
+	<textarea id="input-json" style="width:400px;height:60px;">{first}과 {second}이 마르고 닳도록 {third}이 보우하사 우리나라만세</textarea><br/><br/>
+	<textarea id="json" style="width:400px;height:80px;">{
+  "first" : "동해물",
+  "second": "백두산",
+  "third" : "하느님"
+}</textarea><br/><br/>
+	
+	<button type="button" onclick="fnDoFormatByJson();">JSON 포멧 실행</button>
+	
+	<h3 id="output-json"></h3>
+</div>
+
+</body>
+</html>

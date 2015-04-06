@@ -1,0 +1,31 @@
+{
+  "name": "format",
+  "version": "1.0.0",
+  "description": "javascript string format",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.8.11",
+    "gulp-clean-dest": "^0.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyunjun19/format.git"
+  },
+  "keywords": [
+    "javascript",
+    "js",
+    "string",
+    "format"
+  ],
+  "author": "HJ.Park",
+  "license": "Apache License",
+  "bugs": {
+    "url": "https://github.com/hyunjun19/format/issues"
+  },
+  "homepage": "https://github.com/hyunjun19/format"
+}

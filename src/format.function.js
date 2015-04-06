@@ -2,18 +2,17 @@
  * var jsonTest = "동해물과 {key1}이 마르고 닳도록 {KEY_2}이 보우하사 우리나라만세";
  * var arrayTest = "동해물과 {0}이 마르고 닳도록 {1}이 보우하사 우리나라만세";
  * 
- * console.log(jsonTest.format({ key1: '백두산', KEY_2: '하느님' })); => 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
- * console.log(arrayTest.format('백두산', '하느님')); => 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
+ * console.log(format(jsonTest, { key1: '백두산', KEY_2: '하느님' })); => 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
+ * console.log(format(arrayTest, '백두산', '하느님')); => 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
  */
-String.prototype.format = function() {
-	var str = this;
-	
-	if (arguments.length === 0) { return str.toString(); }
+var format = function(str) {
+	if (arguments.length === 0) { return ''; }
+	if (arguments.length === 1) { return String(str); }
 	
 	var param;
 	// arguments[0] == JSON
-	if (arguments.length === 1 && typeof arguments[0] === 'object' && !('length' in arguments[0])) {
-		param = arguments[0];
+	if (arguments.length === 2 && typeof arguments[1] === 'object' && !('length' in arguments[1])) {
+		param = arguments[1];
 	// arguments == array
 	} else {
 		param = arguments;

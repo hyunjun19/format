@@ -4,6 +4,8 @@
  * 
  * console.log(format(jsonTest, { key1: '백두산', KEY_2: '하느님' })); => 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
  * console.log(format(arrayTest, '백두산', '하느님')); => 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
+ *
+ * TODO: requirejs 지원
  */
 var format = function(str) {
 	if (arguments.length === 0) { return ''; }

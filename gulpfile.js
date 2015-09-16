@@ -17,6 +17,11 @@ gulp.task('uglify', function () {
         .pipe(gulp_uglify(uglifyOption))
         .pipe(gulp_rename('format.function.min.js'))
         .pipe(gulp.dest('dist'));
+
+    gulp.src('src/restful.js')
+        .pipe(gulp_uglify(uglifyOption))
+        .pipe(gulp_rename('restful.min.js'))
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', function(){

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="restful : javascript restful utils">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../src/restful.js"></script>
+    <title>restful</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/hyunjun19/format">View on GitHub</a>
+
+          <h1 id="project_title">restful</h1>
+          <h2 id="project_tagline">javascript restful utils</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/hyunjun19/format/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/hyunjun19/format/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width:816px;">
+
+        <div style="width:264px;float:left;">
+          <h3>router</h3>
+          <textarea id="restful-param-router" rows="14" cols="40">
+/categories/{categoryId}
+/categories/{categoryId}/map
+/deals/{dealId}
+/deals/{dealId}/qnas/{qnaId}
+/deals/{dealId}/qnas/new
+/deals/{dealId}/qnas/{qnaId}/edit
+/deals/{dealId}/reviews/{reviewId}
+/deals/{dealId}/reviews/{reviewId}/new
+/deals/{dealId}/reviews/{reviewId}/edit
+/stayings/{stayId}
+/coupons/{couponId}
+/hotspots/{hotspotId}
+/pages/{page}
+          </textarea>
+        </div>
+
+        <div style="width:264px;float:left;">
+          <h3>input</h3>
+          <textarea id="restful-param-input" rows="14" cols="40" style="float:left;">
+/categories/movie
+/categories/movie/map
+/deals/201409210001
+/deals/201409210001/qnas/qa-231
+/deals/201409210001/qnas/new
+/deals/201409210001/qnas/qa-231/edit
+/deals/201409210001/reviews/rv401
+/deals/201409210001/reviews/rv401/new
+/deals/201409210001/reviews/rv401/edit
+/stayings/korea
+/coupons/cp-2015-01-12-223
+/hotspots/347
+/pages/ski-2016
+          </textarea>
+        </div>
+
+        <div style="width:264px;float:left;">
+          <h3>output</h3>
+          <textarea id="restful-param-output" rows="14" cols="40" style="float:left;"></textarea>
+        </div>
+
+        <div style="clear:both;"></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Format maintained by <a href="https://github.com/hyunjun19">hyunjun19</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+
+    <script type="text/javascript">
+      var routers = $.trim($('#restful-param-router').val()).split(/\n/);
+      var inputs  = $.trim($('#restful-param-input').val()).split(/\n/);
+      var outputs = [];
+
+      for (var i = 0; i < routers.length; i++) {
+        var params = restful.getParams(routers[i], inputs[i]);
+        outputs[i] = JSON.stringify(params);
+      }
+
+      $('#restful-param-output').val(outputs.join('\n'));
+    </script>
+  </body>
+</html>

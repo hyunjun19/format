@@ -1,4 +1,18 @@
-var restful = (function(){
+/**
+ * pathvaiable, querystring 파라미터를 추출하는 클래스
+ *
+ * @param router URL 패턴
+ * @param location 테스트용 변수입니다. 사용하지 마세요.
+ * @example
+ * var params = Restful();
+ * var params = Restful('/category/{code}/{deal}/edit');
+ */
+var Restful = function(router, location){
+
+  var isArray = function(obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
+  };
+
   var error = function(message){
     if (window.console && window.console.error) {
       console.error(message);
@@ -7,16 +21,14 @@ var restful = (function(){
     }
   };
 
-  var getRestfulParams = function(router, url) {
-    if (!router) {
-      error('router parameter is required.');
-      return null;
-    }
+  // default value setting
+  router = router ||'';
+  location = location || window.location;
 
-    var params = {};
-    url = url || window.location.pathname;
+  var params = {};
+  (function() {
     var routers = router.split('/');
-    var urls = url.split('/');
+    var urls = location.pathname.split('/');
 
     // TODO context path는 어쩌지?
     if (routers.length != urls.length) {
@@ -29,18 +41,30 @@ var restful = (function(){
         params[matches[1]] = urls[i];
       }
     }
+  })();
 
-    return params;
-  }
+  (function() {
+    var queryString = location.search;
+    if (!queryString) return params;
 
-  return {
-    /**
-     * get restful params from router and url
-     * @example var params = restful.getparams(router, url);
-     * @param router String url pattern ex) '/category/{code}/{deal}/edit'
-     * @param url String optional default is location.pathname ex) '/category/place/21/edit'
-     * @return params Object ex) {code: "place", deal: "21"}
-     */
-    getParams: getRestfulParams
-  };
-})();
+    var keyVals = queryString.substring(1).split('&');
+    for (var i = 0; i < keyVals.length; i++) {
+      var keyVal = keyVals[i].split('=');
+      var key = keyVal[0];
+      var val = keyVal[1];
+
+      if (key in params) {
+        var preVal = params[key];
+        if (isArray(preVal)) {
+          params[key] = preVal.push(val);
+        } else {
+          params[key] = [ preVal, val ];
+        }
+      } else {
+        params[key] = val;
+      }
+    }
+  })();
+
+  return params;
+};

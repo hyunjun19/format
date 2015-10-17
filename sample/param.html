@@ -5,8 +5,19 @@
 </head>
 <body>
 	<script type="text/javascript">
-		var params = restful.getParams('/category/{code}/{deal}/edit', '/category/place/21/edit');
-		console.log(params);
+		var router = '/category/{code}/{deal}/edit';
+		var location4test =  {
+			'pathname': '/category/place/21/edit',
+			'search'  : '?mode=new&goodId=201&goodId=419&price=2,300&price=5,600'
+		};
+		var params = Restful(router, location4test);
+		writeln('router  :' + router);
+		writeln('location:' + JSON.stringify(location4test));
+		writeln('params  :' + JSON.stringify(params));
+
+		function writeln(txt) {
+			 document.write(txt + '<br>');
+		}
 	</script>
 </body>
 </html>

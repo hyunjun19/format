@@ -1,5 +1,6 @@
 /**
  * pathvaiable, querystring 파라미터를 추출하는 클래스
+ * location.hash 정보를 '_hash'키 값으로 가지고 있다.
  *
  * @param router URL 패턴
  * @param location 테스트용 변수입니다. 사용하지 마세요.
@@ -65,6 +66,8 @@ var Restful = function(router, location){
       }
     }
   })();
+
+  params['_hash'] = (location.hash).replace('#', '') || '';
 
   return params;
 };

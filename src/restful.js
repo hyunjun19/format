@@ -28,6 +28,7 @@ var Restful = function(router, location){
 
   var params = {};
   (function() {
+    if (!router) return;
     var routers = router.split('/');
     var urls = location.pathname.split('/');
 

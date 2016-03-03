@@ -18,7 +18,7 @@ var Restful = function(router, location){
     if (window.console && window.console.error) {
       console.error(message);
     } else {
-      alert(message);
+      //alert(message);
     }
   };
 

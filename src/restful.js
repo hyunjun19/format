@@ -56,9 +56,10 @@ var Restful = function(router, location){
       var val = keyVal[1];
 
       if (key in params) {
-        var preVal = params[key];
+        var preVal = decodeURIComponent(params[key]);
         if (isArray(preVal)) {
-          params[key] = preVal.push(val);
+          preVal.push(val);
+          params[key] = preVal;
         } else {
           params[key] = [ preVal, val ];
         }
